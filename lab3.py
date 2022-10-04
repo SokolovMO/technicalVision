@@ -80,10 +80,10 @@ cv2.destroyAllWindows()
 
 cv2.namedWindow("conversion parameter")
 
-cv2.createTrackbar("ksizeX", "conversion parameter", 1, 100, nothing)
-cv2.createTrackbar("ksizeY", "conversion parameter", 1, 100, nothing)
-cv2.createTrackbar("sigmaX", "conversion parameter", 1, 3, nothing)
-cv2.createTrackbar("sigmaY", "conversion parameter", 1, 3, nothing)
+cv2.createTrackbar("ksizeX", "conversion parameter", 1, 50, nothing)
+cv2.createTrackbar("ksizeY", "conversion parameter", 1, 50, nothing)
+cv2.createTrackbar("sigmaX", "conversion parameter", 1, 10, nothing)
+cv2.createTrackbar("sigmaY", "conversion parameter", 1, 10, nothing)
 
 cv2.moveWindow("conversion parameter", 0, 800)
 cv2.resizeWindow("conversion parameter", 500, 50)
@@ -106,9 +106,9 @@ cv2.destroyAllWindows()
 
 cv2.namedWindow("conversion parameter")
 
-cv2.createTrackbar("d", "conversion parameter", 1, 255, nothing)
-cv2.createTrackbar("sigmaColor", "conversion parameter", 0, 50, nothing)
-cv2.createTrackbar("sigmaSpace", "conversion parameter", 0, 50, nothing)
+cv2.createTrackbar("d", "conversion parameter", 1, 50, nothing)
+cv2.createTrackbar("sigmaColor", "conversion parameter", 0, 10, nothing)
+cv2.createTrackbar("sigmaSpace", "conversion parameter", 0, 10, nothing)
 
 cv2.moveWindow("conversion parameter", 0, 800)
 cv2.resizeWindow("conversion parameter", 500, 50)
@@ -118,7 +118,6 @@ while True:
     d = int(cv2.getTrackbarPos("d", "conversion parameter"))
     sigmaColor = int(cv2.getTrackbarPos("sigmaColor", "conversion parameter"))
     sigmaSpace = int(cv2.getTrackbarPos("sigmaSpace", "conversion parameter"))
-
     try:
         p3_1bilatera = cv2.bilateralFilter(p3_1resize, d, sigmaColor, sigmaSpace, cv2.BORDER_DEFAULT)
         cv2.imshow('p3_1bilatera', p3_1bilatera)
