@@ -1,4 +1,3 @@
-# vbif ns gtne[
 import cv2
 import numpy as np
 
