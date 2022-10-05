@@ -5,19 +5,18 @@ def nothing(x):
     pass
 
 p3_1 = cv2.imread('lr3/3-1.PNG')
-p3_2 = cv2.imread('lr3/3-2.PNG')
-p3_3 = cv2.imread('lr3/3-3.PNG')
-p3_4 = cv2.imread('lr3/3-4.PNG')
-
 p3_1resize = cv2.resize(p3_1, (p3_1.shape[1] // 3, p3_1.shape[0] // 3))
 p3_1resizeGray = cv2.cvtColor(p3_1resize, cv2.COLOR_BGR2GRAY)
 
+p3_2 = cv2.imread('lr3/3-2.PNG')
 p3_2resize = cv2.resize(p3_2, (p3_2.shape[1] // 3, p3_2.shape[0] // 3))
 p3_2resizeGray = cv2.cvtColor(p3_2resize, cv2.COLOR_BGR2GRAY)
 
+p3_3 = cv2.imread('lr3/3-3.PNG')
 p3_3resize = cv2.resize(p3_3, (p3_3.shape[1] // 3, p3_3.shape[0] // 3))
 p3_3resizeGray = cv2.cvtColor(p3_3resize, cv2.COLOR_BGR2GRAY)
 
+p3_4 = cv2.imread('lr3/3-4.PNG')
 p3_4resize = cv2.resize(p3_4, (p3_4.shape[1] // 3, p3_4.shape[0] // 3))
 p3_4resizeGray = cv2.cvtColor(p3_4resize, cv2.COLOR_BGR2GRAY)
 
