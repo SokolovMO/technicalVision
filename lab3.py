@@ -216,18 +216,25 @@ while True:
 cv2.destroyAllWindows()
 
 kernel = np.array([
-        [0, -1, 0],
-        [-1, 5, -1],
-        [0, -1, 0]
+        [-1, -1, -1],
+        [-1, 9, -1],
+        [-1, -1, -1]
 ])
+
+kernelNorm = np.sum(kernel)
+
+if kernelNorm == 0:
+    kernelNorm += 1
+else:
+    pass
 
 while True:
     try:
 
-        p3_1filter2D = cv2.filter2D(p3_1resize, -1, kernel)
-        p3_2filter2D = cv2.filter2D(p3_2resize, -1, kernel)
-        p3_1filter2Dgray = cv2.filter2D(p3_1resizeGray, -1, kernel)
-        p3_2filter2Dgray = cv2.filter2D(p3_2resizeGray, -1, kernel)
+        p3_1filter2D = cv2.filter2D(p3_1resize, -1, 1 / kernelNorm * kernel)
+        p3_2filter2D = cv2.filter2D(p3_2resize, -1, 1 / kernelNorm * kernel)
+        p3_1filter2Dgray = cv2.filter2D(p3_1resizeGray, -1, 1 / kernelNorm * kernel)
+        p3_2filter2Dgray = cv2.filter2D(p3_2resizeGray, -1, 1 / kernelNorm * kernel)
         cv2.imshow('p3_1filter2D', p3_1filter2D)
         cv2.imshow('p3_2filter2D', p3_2filter2D)
         cv2.imshow('p3_1filter2Dgray', p3_1filter2Dgray)
@@ -437,18 +444,25 @@ while True:
 cv2.destroyAllWindows()
 
 kernel = np.array([
-        [0, -1, 0],
-        [-1, 5, -1],
-        [0, -1, 0]
+        [-1, -1, -1],
+        [-1, 9, -1],
+        [-1, -1, -1]
 ])
+
+kernelNorm = np.sum(kernel)
+
+if kernelNorm == 0:
+    kernelNorm += 1
+else:
+    pass
 
 while True:
     try:
 
-        p3_3filter2D = cv2.filter2D(p3_3resize, -1, kernel)
-        p3_4filter2D = cv2.filter2D(p3_4resize, -1, kernel)
-        p3_3filter2Dgray = cv2.filter2D(p3_3resizeGray, -1, kernel)
-        p3_4filter2Dgray = cv2.filter2D(p3_4resizeGray, -1, kernel)
+        p3_3filter2D = cv2.filter2D(p3_3resize, -1, 1 / kernelNorm * kernel)
+        p3_4filter2D = cv2.filter2D(p3_4resize, -1, 1 / kernelNorm * kernel)
+        p3_3filter2Dgray = cv2.filter2D(p3_3resizeGray, -1, 1 / kernelNorm * kernel)
+        p3_4filter2Dgray = cv2.filter2D(p3_4resizeGray, -1, 1 / kernelNorm * kernel)
         cv2.imshow('p3_3filter2D', p3_3filter2D)
         cv2.imshow('p3_4filter2D', p3_4filter2D)
         cv2.imshow('p3_3filter2Dgray', p3_3filter2Dgray)
