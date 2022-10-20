@@ -4,7 +4,7 @@ import numpy as np
 def nothing(x):
     pass
 
-picture = cv2.imread('lr4/picture.jpg')
+picture = cv2.imread('lr4/konspekt.jpg')
 
 # original
 
