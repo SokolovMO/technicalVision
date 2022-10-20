@@ -4,13 +4,9 @@ import numpy as np
 def nothing(x):
     pass
 
-    iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
-    kernelSize = int(cv2.getTrackbarPos("kernelSize", "conversion parameter"))
-    kernel = np.ones((kernelSize, kernelSize), 'uint8')
-    pictureDilate = cv2.dilate(picture, kernel, iterations=iter4tions)
-
-
 picture = cv2.imread('lr4/picture.jpg')
+
+# original
 
 while True:
     cv2.imshow('picture', picture)
@@ -26,6 +22,8 @@ cv2.createTrackbar("kernelSize", "conversion parameter", 1, 10, nothing)
 cv2.moveWindow("conversion parameter", 0, 800)
 cv2.resizeWindow("conversion parameter", 500, 50)
 
+# dilate
+
 while True:
 
     iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
@@ -38,6 +36,8 @@ while True:
 
 cv2.imwrite('lr4/pictureDilate.jpg', pictureDilate)
 cv2.destroyWindow('pictureDilate')
+
+#  erode
 
 while True:
 
