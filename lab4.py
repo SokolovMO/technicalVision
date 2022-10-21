@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import time
 
 def nothing(x):
     pass
@@ -35,9 +36,17 @@ def createTrackbar():
 
 picture = cv2.imread('lr4/picture.jpg')
 
+# video = cv2.VideoCapture('lr2/23.mov')
+
 createTrackbar()
 
 while True:
+
+    # _, picture = video.read()
+    # time.sleep(0.05)
+    # picture = cv2.resize(picture, (picture.shape[1] // 3, picture.shape[0] // 3))
+    # picture = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
+    # _, picture = cv2.threshold(picture, 87, 255, cv2.THRESH_BINARY)
 
     iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
     kernelSize = int(cv2.getTrackbarPos("kernelSize", "conversion parameter"))
