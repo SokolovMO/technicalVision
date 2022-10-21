@@ -18,40 +18,6 @@ def Erode(picture):
     pictureErode = cv2.erode(picture, kernel, iterations=iter4tions)
     return pictureErode
 
-def MORPH_OPEN(picture):
-    iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
-    kernelSize = int(cv2.getTrackbarPos("kernelSize", "conversion parameter"))
-    kernel = np.ones((kernelSize, kernelSize), 'uint8')
-    pictureMORPH_OPEN = cv2.morphologyEx(picture, cv2.MORPH_OPEN, kernel, iterations=iter4tions)
-    return pictureMORPH_OPEN
-
-def MORPH_CLOSE(picture):
-    iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
-    kernelSize = int(cv2.getTrackbarPos("kernelSize", "conversion parameter"))
-    kernel = np.ones((kernelSize, kernelSize), 'uint8')
-    pictureMORPH_CLOSE = cv2.morphologyEx(picture, cv2.MORPH_CLOSE, kernel, iterations=iter4tions)
-    return pictureMORPH_CLOSE
-
-def MORPH_GRADIENT(picture):
-    iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
-    kernelSize = int(cv2.getTrackbarPos("kernelSize", "conversion parameter"))
-    kernel = np.ones((kernelSize, kernelSize), 'uint8')
-    pictureMORPH_GRADIENT = cv2.morphologyEx(picture, cv2.MORPH_GRADIENT, kernel, iterations=iter4tions)
-    return pictureMORPH_GRADIENT
-
-def MORPH_TOPHAT(picture):
-    iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
-    kernelSize = int(cv2.getTrackbarPos("kernelSize", "conversion parameter"))
-    kernel = np.ones((kernelSize, kernelSize), 'uint8')
-    pictureMORPH_TOPHAT = cv2.morphologyEx(picture, cv2.MORPH_TOPHAT, kernel, iterations=iter4tions)
-    return pictureMORPH_TOPHAT
-
-def MORPH_BLACKHAT(picture):
-    iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
-    kernelSize = int(cv2.getTrackbarPos("kernelSize", "conversion parameter"))
-    kernel = np.ones((kernelSize, kernelSize), 'uint8')
-    pictureMORPH_BLACKHAT = cv2.morphologyEx(picture, cv2.MORPH_BLACKHAT, kernel, iterations=iter4tions)
-    return pictureMORPH_BLACKHAT
 
 def morphologyEx(picture):
 
@@ -69,7 +35,7 @@ def morphologyEx(picture):
     elif conversionType == 4:
         pictureMorphologyEx = cv2.morphologyEx(picture, cv2.MORPH_TOPHAT, kernel, iterations=iter4tions)
     elif conversionType == 5:
-        pictureMorphologyEx = cv2.morphologyEx(picture, cv2.MORPH_TOPHAT, kernel, iterations=iter4tions)
+        pictureMorphologyEx = cv2.morphologyEx(picture, cv2.MORPH_BLACKHAT, kernel, iterations=iter4tions)
     else:
         print("поставьте ползунок в положение 1-5")
 
