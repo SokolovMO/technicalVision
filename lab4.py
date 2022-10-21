@@ -19,7 +19,7 @@ def morphologyTransform(picture, kernel, iter4tions, conversionType):
     elif conversionType == 5:
         pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_GRADIENT, kernel, iterations=iter4tions)
     elif conversionType == 6:
-        pictureMorphologycv2.destroyWindow('picture')Transform = cv2.morphologyEx(picture, cv2.MORPH_TOPHAT, kernel, iterations=iter4tions)
+        pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_TOPHAT, kernel, iterations=iter4tions)
     elif conversionType == 7:
         pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_BLACKHAT, kernel, iterations=iter4tions)
 
