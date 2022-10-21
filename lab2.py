@@ -378,6 +378,7 @@ video23 = cv2.VideoCapture('lr2/23.mov')
 while True:
     try:
         _, frame = video23.read()
+        time.sleep(0.05)
         frame = cv2.resize(frame, (frame.shape[1] // 3, frame.shape[0] // 3))
         cv2.imshow('23.mp4', frame)
         cv2.moveWindow('23.mp4', coordPictireX, coordPictireY)
@@ -399,6 +400,7 @@ while True:
     T2 = int(cv2.getTrackbarPos("T2", "conversion parameter"))
     try:
         _, frame = video23.read()
+        time.sleep(0.05)
         frame = cv2.resize(frame, (frame.shape[1] // 3, frame.shape[0] // 3))
         frameGray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
         _, frameTHRESH_BINARY = cv2.threshold(frameGray, T1, T2, cv2.THRESH_BINARY)
@@ -426,6 +428,7 @@ while True:
     try:
         try:
             _, frame = video23.read()
+            time.sleep(0.05)
             frame = cv2.resize(frame, (frame.shape[1] // 3, frame.shape[0] // 3))
             frameGray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             adaptiveFrameTHRESH_BINARY = cv2.adaptiveThreshold(frameGray, T1, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, T2, T3)
@@ -447,6 +450,7 @@ while True:
     try:
         try:
             _, frame = video23.read()
+            time.sleep(0.05)
             frame = cv2.resize(frame, (frame.shape[1] // 3, frame.shape[0] // 3))
             frameGray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             adaptiveFrameTHRESH_BINARY_INV = cv2.adaptiveThreshold(frameGray, T1, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, T2, T3)
