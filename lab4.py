@@ -18,7 +18,6 @@ def Erode(picture):
     pictureErode = cv2.erode(picture, kernel, iterations=iter4tions)
     return pictureErode
 
-
 def morphologyEx(picture):
 
     iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
