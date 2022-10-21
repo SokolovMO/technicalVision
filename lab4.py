@@ -75,6 +75,21 @@ def morphologyEx(picture):
 
     return pictureMorphologyEx
 
+def createTrackbar1():
+    cv2.namedWindow("conversion parameter")
+    cv2.createTrackbar("iterations", "conversion parameter", 1, 10, nothing)
+    cv2.createTrackbar("kernelSize", "conversion parameter", 1, 10, nothing)
+    cv2.moveWindow("conversion parameter", 0, 800)
+    cv2.resizeWindow("conversion parameter", 500, 50)
+
+def createTrackbar2():
+    cv2.namedWindow("conversion parameter")
+    cv2.createTrackbar("iterations", "conversion parameter", 1, 10, nothing)
+    cv2.createTrackbar("kernelSize", "conversion parameter", 1, 10, nothing)
+    cv2.createTrackbar("conversionType", "conversion parameter", 1, 5, nothing)
+    cv2.moveWindow("conversion parameter", 0, 800)
+    cv2.resizeWindow("conversion parameter", 500, 50)
+
 picture = cv2.imread('lr4/picture.jpg')
 
 # original
@@ -86,11 +101,7 @@ while True:
 
 cv2.destroyWindow('picture')
 
-cv2.namedWindow("conversion parameter")
-cv2.createTrackbar("iterations", "conversion parameter", 1, 10, nothing)
-cv2.createTrackbar("kernelSize", "conversion parameter", 1, 10, nothing)
-cv2.moveWindow("conversion parameter", 0, 800)
-cv2.resizeWindow("conversion parameter", 500, 50)
+createTrackbar1()
 
 # dilate
 
@@ -117,12 +128,7 @@ cv2.imwrite('lr4/pictureErode.jpg', pictureErode)
 cv2.destroyWindow('pictureErode')
 cv2.destroyWindow('conversion parameter')
 
-cv2.namedWindow("conversion parameter")
-cv2.createTrackbar("iterations", "conversion parameter", 1, 10, nothing)
-cv2.createTrackbar("kernelSize", "conversion parameter", 1, 10, nothing)
-cv2.createTrackbar("conversionType", "conversion parameter", 1, 5, nothing)
-cv2.moveWindow("conversion parameter", 0, 800)
-cv2.resizeWindow("conversion parameter", 500, 50)
+createTrackbar1()
 
 # morphologyEx
 
