@@ -53,7 +53,29 @@ def MORPH_BLACKHAT(picture):
     pictureMORPH_BLACKHAT = cv2.morphologyEx(picture, cv2.MORPH_BLACKHAT, kernel, iterations=iter4tions)
     return pictureMORPH_BLACKHAT
 
-picture = cv2.imread('lr4/konspekt.jpg')
+def morphologyEx(picture):
+
+    iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
+    kernelSize = int(cv2.getTrackbarPos("kernelSize", "conversion parameter"))
+    conversionType = int(cv2.getTrackbarPos("conversionType", "conversion parameter"))
+    kernel = np.ones((kernelSize, kernelSize), 'uint8')
+
+    if conversionType == 1:
+        pictureMorphologyEx = cv2.morphologyEx(picture, cv2.MORPH_OPEN, kernel, iterations=iter4tions)
+    elif conversionType == 2:
+        pictureMorphologyEx = cv2.morphologyEx(picture, cv2.MORPH_CLOSE, kernel, iterations=iter4tions)
+    elif conversionType == 3:
+        pictureMorphologyEx = cv2.morphologyEx(picture, cv2.MORPH_GRADIENT, kernel, iterations=iter4tions)
+    elif conversionType == 4:
+        pictureMorphologyEx = cv2.morphologyEx(picture, cv2.MORPH_TOPHAT, kernel, iterations=iter4tions)
+    elif conversionType == 5:
+        pictureMorphologyEx = cv2.morphologyEx(picture, cv2.MORPH_TOPHAT, kernel, iterations=iter4tions)
+    else:
+        print("поставьте ползунок в положение 1-5")
+
+    return pictureMorphologyEx
+
+picture = cv2.imread('lr4/picture.jpg')
 
 # original
 
@@ -93,63 +115,23 @@ while True:
 
 cv2.imwrite('lr4/pictureErode.jpg', pictureErode)
 cv2.destroyWindow('pictureErode')
+cv2.destroyWindow('conversion parameter')
 
-# OPEN
+cv2.namedWindow("conversion parameter")
+cv2.createTrackbar("iterations", "conversion parameter", 1, 10, nothing)
+cv2.createTrackbar("kernelSize", "conversion parameter", 1, 10, nothing)
+cv2.createTrackbar("conversionType", "conversion parameter", 1, 5, nothing)
+cv2.moveWindow("conversion parameter", 0, 800)
+cv2.resizeWindow("conversion parameter", 500, 50)
 
-while True:
-
-    pictureMORPH_OPEN = MORPH_OPEN(picture)
-    cv2.imshow('pictureMORPH_OPEN', pictureMORPH_OPEN)
-    if cv2.waitKey(1) == ord('q'):
-        break
-
-cv2.imwrite('lr4/pictureMORPH_OPEN.jpg', pictureMORPH_OPEN)
-cv2.destroyWindow('pictureMORPH_OPEN')
-
-# CLOSE
+# morphologyEx
 
 while True:
 
-    pictureMORPH_CLOSE = MORPH_CLOSE(picture)
-    cv2.imshow('pictureMORPH_CLOSE', pictureMORPH_CLOSE)
+    pictureMorphologyEx = morphologyEx(picture)
+    cv2.imshow('pictureMorphologyEx', pictureMorphologyEx)
     if cv2.waitKey(1) == ord('q'):
         break
 
-cv2.imwrite('lr4/pictureMORPH_CLOSE.jpg', pictureMORPH_CLOSE)
-cv2.destroyWindow('pictureMORPH_CLOSE')
-
-# GRADIENT
-
-while True:
-
-    pictureMORPH_GRADIENT = MORPH_GRADIENT(picture)
-    cv2.imshow('pictureMORPH_GRADIENT', pictureMORPH_GRADIENT)
-    if cv2.waitKey(1) == ord('q'):
-        break
-
-cv2.imwrite('lr4/pictureMORPH_GRADIENT.jpg', pictureMORPH_GRADIENT)
-cv2.destroyWindow('pictureMORPH_GRADIENT')
-
-# TOPHAT
-
-while True:
-
-    pictureMORPH_TOPHAT = MORPH_TOPHAT(picture)
-    cv2.imshow('pictureMORPH_TOPHAT', pictureMORPH_TOPHAT)
-    if cv2.waitKey(1) == ord('q'):
-        break
-
-cv2.imwrite('lr4/pictureMORPH_TOPHAT.jpg', pictureMORPH_TOPHAT)
-cv2.destroyWindow('pictureMORPH_TOPHAT')
-
-# BLACKHAT
-
-while True:
-
-    pictureMORPH_BLACKHAT = MORPH_BLACKHAT(picture)
-    cv2.imshow('pictureMORPH_BLACKHAT', pictureMORPH_BLACKHAT)
-    if cv2.waitKey(1) == ord('q'):
-        break
-
-cv2.imwrite('lr4/pictureMORPH_BLACKHAT.jpg', pictureMORPH_BLACKHAT)
-cv2.destroyWindow('pictureMORPH_BLACKHAT')
+cv2.imwrite('lr4/pictureMorphologyEx.jpg', pictureMorphologyEx)
+cv2.destroyAllWindows()
