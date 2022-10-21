@@ -128,13 +128,18 @@ cv2.imwrite('lr4/pictureErode.jpg', pictureErode)
 cv2.destroyWindow('pictureErode')
 cv2.destroyWindow('conversion parameter')
 
-createTrackbar1()
+createTrackbar2()
 
 # morphologyEx
 
 while True:
 
     pictureMorphologyEx = morphologyEx(picture)
+    cv2.putText(pictureMorphologyEx, '1 - OPEN', (pictureMorphologyEx.shape[0] // 2, pictureMorphologyEx.shape[1] // 2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (13, 158, 100), 2)
+    cv2.putText(pictureMorphologyEx, '2 - CLOSE', (pictureMorphologyEx.shape[0] // 2, pictureMorphologyEx.shape[1] // 2 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (13, 158, 100), 2)
+    cv2.putText(pictureMorphologyEx, '3 - GRADIENT', (pictureMorphologyEx.shape[0] // 2, pictureMorphologyEx.shape[1] // 2 + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (13, 158, 100), 2)
+    cv2.putText(pictureMorphologyEx, '4 - TOPHAT', (pictureMorphologyEx.shape[0] // 2, pictureMorphologyEx.shape[1] // 2 + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (13, 158, 100), 2)
+    cv2.putText(pictureMorphologyEx, '5 - BLACKHAT', (pictureMorphologyEx.shape[0] // 2, pictureMorphologyEx.shape[1] // 2 + 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (13, 158, 100), 2)
     cv2.imshow('pictureMorphologyEx', pictureMorphologyEx)
     if cv2.waitKey(1) == ord('q'):
         break
