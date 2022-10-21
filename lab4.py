@@ -135,11 +135,11 @@ createTrackbar2()
 while True:
 
     pictureMorphologyEx = morphologyEx(picture)
-    cv2.putText(pictureMorphologyEx, '1 - OPEN', (pictureMorphologyEx.shape[0] // 2, pictureMorphologyEx.shape[1] // 2), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (13, 158, 100), 2)
-    cv2.putText(pictureMorphologyEx, '2 - CLOSE', (pictureMorphologyEx.shape[0] // 2, pictureMorphologyEx.shape[1] // 2 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (13, 158, 100), 2)
-    cv2.putText(pictureMorphologyEx, '3 - GRADIENT', (pictureMorphologyEx.shape[0] // 2, pictureMorphologyEx.shape[1] // 2 + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (13, 158, 100), 2)
-    cv2.putText(pictureMorphologyEx, '4 - TOPHAT', (pictureMorphologyEx.shape[0] // 2, pictureMorphologyEx.shape[1] // 2 + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (13, 158, 100), 2)
-    cv2.putText(pictureMorphologyEx, '5 - BLACKHAT', (pictureMorphologyEx.shape[0] // 2, pictureMorphologyEx.shape[1] // 2 + 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (13, 158, 100), 2)
+    cv2.putText(pictureMorphologyEx, '1 - OPEN', (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+    cv2.putText(pictureMorphologyEx, '2 - CLOSE', (10, 20 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+    cv2.putText(pictureMorphologyEx, '3 - GRADIENT', (10, 20 + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+    cv2.putText(pictureMorphologyEx, '4 - TOPHAT', (10, 20 + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+    cv2.putText(pictureMorphologyEx, '5 - BLACKHAT', (10, 20 + 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
     cv2.imshow('pictureMorphologyEx', pictureMorphologyEx)
     if cv2.waitKey(1) == ord('q'):
         break
