@@ -5,74 +5,117 @@ import time
 def nothing(x):
     pass
 
-def createTrackbar1():
+def createTrackbarSobel():
     cv2.namedWindow("conversion parameter")
-    cv2.createTrackbar("xorder", "conversion parameter", 1, 10, nothing)
-    cv2.createTrackbar("yorder", "conversion parameter", 1, 10, nothing)
-    cv2.createTrackbar("ksize", "conversion parameter", 0, 7, nothing)
+    cv2.createTrackbar("xorder", "conversion parameter", 0, 2, nothing)
+    cv2.createTrackbar("yorder", "conversion parameter", 0, 2, nothing)
     cv2.moveWindow("conversion parameter", 0, 800)
     cv2.resizeWindow("conversion parameter", 500, 50)
 
-def createTrackbar2():
-    cv2.namedWindow("conversion parameter")
-    cv2.createTrackbar("ksize", "conversion parameter", 0, 7, nothing)
-    cv2.createTrackbar("scale", "conversion parameter", 1, 10, nothing)
-    cv2.createTrackbar("delta", "conversion parameter", 1, 10, nothing)
-    cv2.moveWindow("conversion parameter", 0, 800)
-    cv2.resizeWindow("conversion parameter", 500, 50)
-
-def createTrackbar3():
+def createTrackbarCanny():
     cv2.namedWindow("conversion parameter")
     cv2.createTrackbar("threshold1", "conversion parameter", 0, 255, nothing)
     cv2.createTrackbar("threshold2", "conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("apertureSize", "conversion parameter", 1, 10, nothing)
     cv2.moveWindow("conversion parameter", 0, 800)
     cv2.resizeWindow("conversion parameter", 500, 50)
 
-pictureNonResize = cv2.imread('lr5/5-1.jpg')
-picture = cv2.resize(pictureNonResize, (pictureNonResize.shape[1] // 5, pictureNonResize.shape[0] // 5))
+coordPictireX = 0
+coordPictireY = 0
+
+# задание 1
+
+pictureNonResize = cv2.imread('lr5/5-2.jpg')
+picture = cv2.resize(pictureNonResize, (pictureNonResize.shape[1] // 8, pictureNonResize.shape[0] // 8))
 
 while True:
     cv2.imshow('picture', picture)
+    cv2.moveWindow('picture', coordPictireX, coordPictireY)
     if cv2.waitKey(1) == ord('q'):
         break
 
 cv2.destroyAllWindows()
 
-createTrackbar1()
+createTrackbarSobel()
 
 while True:
     xorder = int(cv2.getTrackbarPos("xorder", "conversion parameter"))
     yorder = int(cv2.getTrackbarPos("yorder", "conversion parameter"))
-    ksize = int(cv2.getTrackbarPos("yorder", "conversion parameter"))
-    pictureSobel = cv2.Sobel(picture, cv2.CV_8U, xorder, yorder, ksize)
-    cv2.imshow('pictureSobel', pictureSobel)
+    try:
+        pictureSobel = cv2.Sobel(picture, cv2.CV_8U, xorder, yorder, ksize=3, scale=1, delta=0)
+        cv2.imshow('pictureSobel', pictureSobel)
+        cv2.moveWindow('pictureSobel', coordPictireX, coordPictireY)
+    except cv2.error:
+        cv2.destroyWindow('pictureSobel')
+        pass
     if cv2.waitKey(1) == ord('q'):
         break
 
 cv2.destroyAllWindows()
-
-createTrackbar2()
 
 while True:
-    ksize = int(cv2.getTrackbarPos("ksize", "conversion parameter"))
-    scale = int(cv2.getTrackbarPos("scale", "conversion parameter"))
-    delta = int(cv2.getTrackbarPos("delta", "conversion parameter"))
-    pictureLaplacian = cv2.Laplacian(picture, cv2.CV_8U, ksize, scale, delta)
+    pictureLaplacian = cv2.Laplacian(picture, cv2.CV_8U, ksize=3, scale=1, delta=0)
     cv2.imshow('pictureLaplacian', pictureLaplacian)
+    cv2.moveWindow('pictureLaplacian', coordPictireX, coordPictireY)
     if cv2.waitKey(1) == ord('q'):
         break
 
 cv2.destroyAllWindows()
 
-createTrackbar3()
+createTrackbarCanny()
 
 while True:
     threshold1 = int(cv2.getTrackbarPos("threshold1", "conversion parameter"))
     threshold2 = int(cv2.getTrackbarPos("threshold2", "conversion parameter"))
-    apertureSize = int(cv2.getTrackbarPos("apertureSize", "conversion parameter"))
-    pictureCanny = cv2.Canny(picture, threshold1, threshold2, apertureSize)
+    pictureCanny = cv2.Canny(picture, threshold1, threshold2, apertureSize=3, L2gradient=False)
     cv2.imshow('pictureCanny', pictureCanny)
+    cv2.moveWindow('pictureCanny', coordPictireX, coordPictireY)
+    if cv2.waitKey(1) == ord('q'):
+        break
+
+cv2.destroyAllWindows()
+
+# задание 2
+
+pictureNonResize = cv2.imread('lr5/5-5.jpg')
+picture = cv2.resize(pictureNonResize, (pictureNonResize.shape[1] // 1, pictureNonResize.shape[0] // 1))
+
+while True:
+    cv2.imshow('picture', picture)
+    cv2.moveWindow('picture', coordPictireX, coordPictireY)
+    if cv2.waitKey(1) == ord('q'):
+        break
+
+cv2.destroyAllWindows()
+
+createTrackbarCanny()
+
+while True:
+    threshold1 = int(cv2.getTrackbarPos("threshold1", "conversion parameter"))
+    threshold2 = int(cv2.getTrackbarPos("threshold2", "conversion parameter"))
+    pictureCanny = cv2.Canny(picture, threshold1, threshold2, apertureSize=3, L2gradient=False)
+    cv2.imshow('pictureCanny', pictureCanny)
+    cv2.moveWindow('pictureCanny', coordPictireX, coordPictireY)
+    if cv2.waitKey(1) == ord('q'):
+        break
+
+cv2.destroyAllWindows()
+
+# задание 3
+
+video = cv2.VideoCapture('lr5/highway.mp4')
+
+createTrackbarCanny()
+
+while True:
+
+    _, picture = video.read()
+    picture = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
+    time.sleep(0.05)
+    threshold1 = int(cv2.getTrackbarPos("threshold1", "conversion parameter"))
+    threshold2 = int(cv2.getTrackbarPos("threshold2", "conversion parameter"))
+    pictureCanny = cv2.Canny(picture, threshold1, threshold2, apertureSize=3, L2gradient=False)
+    cv2.imshow('video', pictureCanny)
+    cv2.moveWindow('pictureCanny', coordPictireX, coordPictireY)
     if cv2.waitKey(1) == ord('q'):
         break
 
