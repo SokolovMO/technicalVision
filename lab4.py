@@ -31,14 +31,29 @@ def createTrackbar():
     cv2.createTrackbar("iterations", "conversion parameter", 1, 10, nothing)
     cv2.createTrackbar("kernelSize", "conversion parameter", 1, 10, nothing)
     cv2.createTrackbar("conversionType", "conversion parameter", 0, 7, nothing)
-    cv2.moveWindow("conversion parameter", 0, 800)
-    cv2.resizeWindow("conversion parameter", 500, 50)
+    cv2.moveWindow("conversion parameter", 960, 100)
+
+def helpWindow():
+    background = np.full((200, 200, 3), 255, dtype='uint8')
+    cv2.putText(background, 'select transform type', (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+    cv2.putText(background, '0 - ORIGINAL', (10, 20 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+    cv2.putText(background, '1 - DILATE', (10, 20 + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+    cv2.putText(background, '2 - ERODE', (10, 20 + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+    cv2.putText(background, '3 - OPEN', (10, 20 + 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+    cv2.putText(background, '4 - CLOSE', (10, 20 + 100), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+    cv2.putText(background, '5 - GRADIENT', (10, 20 + 120), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+    cv2.putText(background, '6 - TOPHAT', (10, 20 + 140), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+    cv2.putText(background, '7 - BLACKHAT', (10, 20 + 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+    cv2.imshow('help', background)
+    cv2.moveWindow("help", 960, 350)
 
 picture = cv2.imread('lr4/picture.jpg', cv2.IMREAD_GRAYSCALE)
 
 # video = cv2.VideoCapture('lr2/23.mov')
 
 createTrackbar()
+
+helpWindow()
 
 while True:
 
@@ -51,17 +66,8 @@ while True:
     iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
     kernelSize = int(cv2.getTrackbarPos("kernelSize", "conversion parameter"))
     conversionType = int(cv2.getTrackbarPos("conversionType", "conversion parameter"))
-    kernel = np.ones((kernelSize, kernelSize), 'uint8')
+    kernel = np.full((kernelSize, kernelSize), 1, dtype='uint8')
     pictureMorphologyTransform = morphologyTransform(picture, kernel, iter4tions, conversionType)
-    cv2.putText(pictureMorphologyTransform, 'select transform type', (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-    cv2.putText(pictureMorphologyTransform, '0 - ORIGINAL', (10, 20 + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-    cv2.putText(pictureMorphologyTransform, '1 - DILATE', (10, 20 + 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-    cv2.putText(pictureMorphologyTransform, '2 - ERODE', (10, 20 + 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-    cv2.putText(pictureMorphologyTransform, '3 - OPEN', (10, 20 + 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-    cv2.putText(pictureMorphologyTransform, '4 - CLOSE', (10, 20 + 100), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-    cv2.putText(pictureMorphologyTransform, '5 - GRADIENT', (10, 20 + 120), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-    cv2.putText(pictureMorphologyTransform, '6 - TOPHAT', (10, 20 + 140), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
-    cv2.putText(pictureMorphologyTransform, '7 - BLACKHAT', (10, 20 + 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
     cv2.imshow('pictureMorphologyEx', pictureMorphologyTransform)
     if cv2.waitKey(1) == ord('q'):
         break
