@@ -10,19 +10,19 @@ def morphologyTransform(picture, kernel, iter4tions, conversionType):
     if conversionType == 0:
         pictureMorphologyTransform = picture
     elif conversionType == 1:
-        pictureMorphologyTransform = cv2.dilate(picture, kernel, iterations=iter4tions)
+        pictureMorphologyTransform = cv2.dilate(picture, kernel, iterations=iter4tions) # "приклеивание" к белым областям белых областей
     elif conversionType == 2:
-        pictureMorphologyTransform = cv2.erode(picture, kernel, iterations=iter4tions)
+        pictureMorphologyTransform = cv2.erode(picture, kernel, iterations=iter4tions) # "стирание" белых областей к черным
     elif conversionType == 3:
-        pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_OPEN, kernel, iterations=iter4tions)
+        pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_OPEN, kernel, iterations=iter4tions) # сначала применяется эрозия, потом наращивание; если итераций несколько, они повторяются по кругу
     elif conversionType == 4:
-        pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_CLOSE, kernel, iterations=iter4tions)
+        pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_CLOSE, kernel, iterations=iter4tions) # сначала наращивание, потом эрозия; аналогично при повторении
     elif conversionType == 5:
-        pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_GRADIENT, kernel, iterations=iter4tions)
+        pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_GRADIENT, kernel, iterations=iter4tions) # разность между результатом наращивания и результатом эрозии
     elif conversionType == 6:
-        pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_TOPHAT, kernel, iterations=iter4tions)
+        pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_TOPHAT, kernel, iterations=iter4tions) # из исходного изображения вычитается его размыкание
     elif conversionType == 7:
-        pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_BLACKHAT, kernel, iterations=iter4tions)
+        pictureMorphologyTransform = cv2.morphologyEx(picture, cv2.MORPH_BLACKHAT, kernel, iterations=iter4tions) # из замыкания вычитается само изображение
 
     return pictureMorphologyTransform
 
@@ -34,7 +34,7 @@ def createTrackbar():
     cv2.moveWindow("conversion parameter", 0, 800)
     cv2.resizeWindow("conversion parameter", 500, 50)
 
-picture = cv2.imread('lr4/picture.jpg')
+picture = cv2.imread('lr4/picture.jpg', cv2.IMREAD_GRAYSCALE)
 
 # video = cv2.VideoCapture('lr2/23.mov')
 

@@ -34,7 +34,7 @@ cv2.destroyAllWindows()
 #задание 1 ВАРИАНТ 2
 
 # пункт 1
-me = cv2.imread('lr1/me.jpg', flags = cv2.IMREAD_REDUCED_COLOR_4 )
+me = cv2.imread('lr1/me.jpg', flags = cv2.IMREAD_REDUCED_COLOR_4)
 cv2.imshow('me', me)
 cv2.waitKey(1000)
 cv2.destroyAllWindows()
