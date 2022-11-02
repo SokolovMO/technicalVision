@@ -102,21 +102,25 @@ cv2.destroyAllWindows()
 
 # задание 3
 
-video = cv2.VideoCapture('lr5/highway.mp4')
+video = cv2.VideoCapture('lr5/road.MOV')
 
 createTrackbarCanny()
 
 while True:
 
-    _, picture = video.read()
-    picture = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
-    time.sleep(0.05)
-    threshold1 = int(cv2.getTrackbarPos("threshold1", "conversion parameter"))
-    threshold2 = int(cv2.getTrackbarPos("threshold2", "conversion parameter"))
-    pictureCanny = cv2.Canny(picture, threshold1, threshold2, apertureSize=3, L2gradient=False)
-    cv2.imshow('video', pictureCanny)
-    cv2.moveWindow('pictureCanny', coordPictireX, coordPictireY)
-    if cv2.waitKey(1) == ord('q'):
+    try:
+        _, pictureNonResize = video.read()
+        picture = cv2.resize(pictureNonResize, (pictureNonResize.shape[1] // 2, pictureNonResize.shape[0] // 2))
+        picture = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
+        time.sleep(0.013)
+        threshold1 = int(cv2.getTrackbarPos("threshold1", "conversion parameter"))
+        threshold2 = int(cv2.getTrackbarPos("threshold2", "conversion parameter"))
+        pictureCanny = cv2.Canny(picture, threshold1, threshold2, apertureSize=3, L2gradient=False)
+        cv2.imshow('video', pictureCanny)
+        cv2.moveWindow('pictureCanny', coordPictireX, coordPictireY)
+        if cv2.waitKey(1) == ord('q'):
+            break
+    except AttributeError:
         break
 
 cv2.destroyAllWindows()
