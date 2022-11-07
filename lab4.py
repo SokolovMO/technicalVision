@@ -66,8 +66,10 @@ while True:
     iter4tions = int(cv2.getTrackbarPos("iterations", "conversion parameter"))
     kernelSize = int(cv2.getTrackbarPos("kernelSize", "conversion parameter"))
     conversionType = int(cv2.getTrackbarPos("conversionType", "conversion parameter"))
+
     kernel = np.full((kernelSize, kernelSize), 1, dtype='uint8')
     pictureMorphologyTransform = morphologyTransform(picture, kernel, iter4tions, conversionType)
+
     cv2.imshow('pictureMorphologyEx', pictureMorphologyTransform)
     if cv2.waitKey(1) == ord('q'):
         break
