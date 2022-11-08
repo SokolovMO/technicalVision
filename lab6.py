@@ -15,8 +15,7 @@ def createTrackbarForFindCountoursAndDrawContours():
     cv2.createTrackbar("thickness", "conversion parameter", 0, 50, nothing)
     cv2.moveWindow("conversion parameter", 960, 100)
 
-picture = cv2.imread('lr6/picture.png')
-picture = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
+picture = cv2.imread('lr6/picture.png', cv2.IMREAD_GRAYSCALE)
 _, picture = cv2.threshold(picture, 100, 255, cv2.THRESH_BINARY)
 pictureCopy = picture
 createTrackbarForFindCountoursAndDrawContours()
