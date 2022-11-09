@@ -58,159 +58,161 @@ def createTrackbarForCircles():
 
 # решение 1
 
-picture7_1 = cv2.imread('lr7/7_1.jpg', cv2.IMREAD_GRAYSCALE)
+if __name__ == "__main__":
 
-while True:
+    picture7_1 = cv2.imread('lr7/7_1.jpg', cv2.IMREAD_GRAYSCALE)
 
-    cv2.imshow("original", picture7_1)
+    while True:
 
-    if cv2.waitKey(1) == ord('q'):
-        break
+        cv2.imshow("original", picture7_1)
 
-cv2.destroyAllWindows()
+        if cv2.waitKey(1) == ord('q'):
+            break
 
-createTrackbarForCannyAndHoughLines()
+    cv2.destroyAllWindows()
 
-while True:
+    createTrackbarForCannyAndHoughLines()
 
-    try:
+    while True:
 
-        threshold1 = int(cv2.getTrackbarPos("threshold1", "hough lines conversion parameter"))
-        threshold2 = int(cv2.getTrackbarPos("threshold2", "hough lines conversion parameter"))
+        try:
 
-        rho_res = int(cv2.getTrackbarPos("rho_res", "hough lines conversion parameter"))
-        theta_res = int(cv2.getTrackbarPos("theta_res", "hough lines conversion parameter"))
-        threshold = int(cv2.getTrackbarPos("threshold", "hough lines conversion parameter"))
+            threshold1 = int(cv2.getTrackbarPos("threshold1", "hough lines conversion parameter"))
+            threshold2 = int(cv2.getTrackbarPos("threshold2", "hough lines conversion parameter"))
 
-        colorB = int(cv2.getTrackbarPos("colorB", "hough lines conversion parameter"))
-        colorG = int(cv2.getTrackbarPos("colorG", "hough lines conversion parameter"))
-        colorR = int(cv2.getTrackbarPos("colorR", "hough lines conversion parameter"))
+            rho_res = int(cv2.getTrackbarPos("rho_res", "hough lines conversion parameter"))
+            theta_res = int(cv2.getTrackbarPos("theta_res", "hough lines conversion parameter"))
+            threshold = int(cv2.getTrackbarPos("threshold", "hough lines conversion parameter"))
 
-        pictureAfterCanny = cv2.Canny(picture7_1, threshold1, threshold2, apertureSize=3, L2gradient=False)
-        pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
-        lines = cv2.HoughLines(pictureAfterCanny, rho_res, theta_res * np.pi / 180, threshold, min_theta=None, max_theta=None)
+            colorB = int(cv2.getTrackbarPos("colorB", "hough lines conversion parameter"))
+            colorG = int(cv2.getTrackbarPos("colorG", "hough lines conversion parameter"))
+            colorR = int(cv2.getTrackbarPos("colorR", "hough lines conversion parameter"))
 
-        if lines is not None:
-            for i in range(0, len(lines)):
-                rho = lines[i][0][0]
-                theta = lines[i][0][1]
-                a = math.cos(theta)
-                b = math.sin(theta)
-                x0 = a * rho
-                y0 = b * rho
-                pt1 = (int(x0 + 1000 * (-b)), int(y0 + 1000 * (a)))
-                pt2 = (int(x0 - 1000 * (-b)), int(y0 - 1000 * (a)))
-                cv2.line(pictureAfterCannyBGR, pt1, pt2, (colorB, colorG, colorR), 3, cv2.LINE_AA)
+            pictureAfterCanny = cv2.Canny(picture7_1, threshold1, threshold2, apertureSize=3, L2gradient=False)
+            pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
+            lines = cv2.HoughLines(pictureAfterCanny, rho_res, theta_res * np.pi / 180, threshold, min_theta=None, max_theta=None)
 
-        cv2.imshow("result of standard hough line transform", pictureAfterCannyBGR)
+            if lines is not None:
+                for i in range(0, len(lines)):
+                    rho = lines[i][0][0]
+                    theta = lines[i][0][1]
+                    a = math.cos(theta)
+                    b = math.sin(theta)
+                    x0 = a * rho
+                    y0 = b * rho
+                    pt1 = (int(x0 + 1000 * (-b)), int(y0 + 1000 * (a)))
+                    pt2 = (int(x0 - 1000 * (-b)), int(y0 - 1000 * (a)))
+                    cv2.line(pictureAfterCannyBGR, pt1, pt2, (colorB, colorG, colorR), 3, cv2.LINE_AA)
 
-    except cv2.error:
-        pass
+            cv2.imshow("result of standard hough line transform", pictureAfterCannyBGR)
 
-    if cv2.waitKey(1) == ord('q'):
-        break
+        except cv2.error:
+            pass
 
-cv2.destroyAllWindows()
+        if cv2.waitKey(1) == ord('q'):
+            break
 
-createTrackbarForCannyAndHoughLinesP()
+    cv2.destroyAllWindows()
 
-while True:
+    createTrackbarForCannyAndHoughLinesP()
 
-    try:
+    while True:
 
-        threshold1 = int(cv2.getTrackbarPos("threshold1", "hough lines conversion parameter P"))
-        threshold2 = int(cv2.getTrackbarPos("threshold2", "hough lines conversion parameter P"))
+        try:
 
-        rho_res = int(cv2.getTrackbarPos("rho_res", "hough lines conversion parameter P"))
-        theta_res = int(cv2.getTrackbarPos("theta_res", "hough lines conversion parameter P"))
-        threshold = int(cv2.getTrackbarPos("threshold", "hough lines conversion parameter P"))
-        minLineLength = int(cv2.getTrackbarPos("minLineLength", "hough lines conversion parameter P"))
-        maxLineGap = int(cv2.getTrackbarPos("maxLineGap", "hough lines conversion parameter P"))
+            threshold1 = int(cv2.getTrackbarPos("threshold1", "hough lines conversion parameter P"))
+            threshold2 = int(cv2.getTrackbarPos("threshold2", "hough lines conversion parameter P"))
 
-        colorB = int(cv2.getTrackbarPos("colorB", "hough lines conversion parameter P"))
-        colorG = int(cv2.getTrackbarPos("colorG", "hough lines conversion parameter P"))
-        colorR = int(cv2.getTrackbarPos("colorR", "hough lines conversion parameter P"))
+            rho_res = int(cv2.getTrackbarPos("rho_res", "hough lines conversion parameter P"))
+            theta_res = int(cv2.getTrackbarPos("theta_res", "hough lines conversion parameter P"))
+            threshold = int(cv2.getTrackbarPos("threshold", "hough lines conversion parameter P"))
+            minLineLength = int(cv2.getTrackbarPos("minLineLength", "hough lines conversion parameter P"))
+            maxLineGap = int(cv2.getTrackbarPos("maxLineGap", "hough lines conversion parameter P"))
 
-        pictureAfterCanny = cv2.Canny(picture7_1, threshold1, threshold2, apertureSize=3, L2gradient=False)
-        pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
-        linesP = cv2.HoughLinesP(pictureAfterCanny, rho_res, theta_res * np.pi / 180, threshold, None, minLineLength, maxLineGap)
+            colorB = int(cv2.getTrackbarPos("colorB", "hough lines conversion parameter P"))
+            colorG = int(cv2.getTrackbarPos("colorG", "hough lines conversion parameter P"))
+            colorR = int(cv2.getTrackbarPos("colorR", "hough lines conversion parameter P"))
 
-        if linesP is not None:
-            for i in range(0, len(linesP)):
-                l = linesP[i][0]
-                cv2.line(pictureAfterCannyBGR, (l[0], l[1]), (l[2], l[3]), (colorB, colorG, colorR), 3, cv2.LINE_AA)
+            pictureAfterCanny = cv2.Canny(picture7_1, threshold1, threshold2, apertureSize=3, L2gradient=False)
+            pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
+            linesP = cv2.HoughLinesP(pictureAfterCanny, rho_res, theta_res * np.pi / 180, threshold, None, minLineLength, maxLineGap)
 
-        cv2.imshow("result of probabilistic line transform", pictureAfterCannyBGR)
+            if linesP is not None:
+                for i in range(0, len(linesP)):
+                    l = linesP[i][0]
+                    cv2.line(pictureAfterCannyBGR, (l[0], l[1]), (l[2], l[3]), (colorB, colorG, colorR), 3, cv2.LINE_AA)
 
-    except cv2.error:
-        pass
-    if cv2.waitKey(1) == ord('q'):
-        break
+            cv2.imshow("result of probabilistic line transform", pictureAfterCannyBGR)
 
-cv2.destroyAllWindows()
+        except cv2.error:
+            pass
+        if cv2.waitKey(1) == ord('q'):
+            break
 
-# решение 2
+    cv2.destroyAllWindows()
 
-pictureP2 = cv2.imread('lr7/pictureP2.png', cv2.IMREAD_GRAYSCALE)
+    # решение 2
 
-while True:
+    pictureP2 = cv2.imread('lr7/pictureP2.png', cv2.IMREAD_GRAYSCALE)
 
-    cv2.imshow("original", pictureP2)
+    while True:
 
-    if cv2.waitKey(1) == ord('q'):
-        break
+        cv2.imshow("original", pictureP2)
 
-cv2.destroyAllWindows()
+        if cv2.waitKey(1) == ord('q'):
+            break
 
-createTrackbarForCannyAndHoughLinesP()
-createTrackbarForCircles()
+    cv2.destroyAllWindows()
 
-while True:
+    createTrackbarForCannyAndHoughLinesP()
+    createTrackbarForCircles()
 
-    try:
+    while True:
 
-        threshold1 = int(cv2.getTrackbarPos("threshold1", "hough lines conversion parameter P"))
-        threshold2 = int(cv2.getTrackbarPos("threshold2", "hough lines conversion parameter P"))
+        try:
 
-        rho_res = int(cv2.getTrackbarPos("rho_res", "hough lines conversion parameter P"))
-        theta_res = int(cv2.getTrackbarPos("theta_res", "hough lines conversion parameter P"))
-        threshold = int(cv2.getTrackbarPos("threshold", "hough lines conversion parameter P"))
-        minLineLength = int(cv2.getTrackbarPos("minLineLength", "hough lines conversion parameter P"))
-        maxLineGap = int(cv2.getTrackbarPos("maxLineGap", "hough lines conversion parameter P"))
+            threshold1 = int(cv2.getTrackbarPos("threshold1", "hough lines conversion parameter P"))
+            threshold2 = int(cv2.getTrackbarPos("threshold2", "hough lines conversion parameter P"))
 
-        colorB = int(cv2.getTrackbarPos("colorB", "hough lines conversion parameter P"))
-        colorG = int(cv2.getTrackbarPos("colorG", "hough lines conversion parameter P"))
-        colorR = int(cv2.getTrackbarPos("colorR", "hough lines conversion parameter P"))
+            rho_res = int(cv2.getTrackbarPos("rho_res", "hough lines conversion parameter P"))
+            theta_res = int(cv2.getTrackbarPos("theta_res", "hough lines conversion parameter P"))
+            threshold = int(cv2.getTrackbarPos("threshold", "hough lines conversion parameter P"))
+            minLineLength = int(cv2.getTrackbarPos("minLineLength", "hough lines conversion parameter P"))
+            maxLineGap = int(cv2.getTrackbarPos("maxLineGap", "hough lines conversion parameter P"))
 
-        dp = int(cv2.getTrackbarPos("rho_res", "conversion parameter"))
-        minDist = int(cv2.getTrackbarPos("theta_res", "conversion parameter"))
-        param1 = int(cv2.getTrackbarPos("param1", "conversion parameter"))
-        param2 = int(cv2.getTrackbarPos("param2", "conversion parameter"))
-        minRadius = int(cv2.getTrackbarPos("minRadius", "conversion parameter"))
-        maxRadius = int(cv2.getTrackbarPos("maxRadius", "conversion parameter"))
+            colorB = int(cv2.getTrackbarPos("colorB", "hough lines conversion parameter P"))
+            colorG = int(cv2.getTrackbarPos("colorG", "hough lines conversion parameter P"))
+            colorR = int(cv2.getTrackbarPos("colorR", "hough lines conversion parameter P"))
 
-        pictureAfterCanny = cv2.Canny(pictureP2, threshold1, threshold2, apertureSize=3, L2gradient=False)
-        pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
+            dp = int(cv2.getTrackbarPos("rho_res", "conversion parameter"))
+            minDist = int(cv2.getTrackbarPos("theta_res", "conversion parameter"))
+            param1 = int(cv2.getTrackbarPos("param1", "conversion parameter"))
+            param2 = int(cv2.getTrackbarPos("param2", "conversion parameter"))
+            minRadius = int(cv2.getTrackbarPos("minRadius", "conversion parameter"))
+            maxRadius = int(cv2.getTrackbarPos("maxRadius", "conversion parameter"))
 
-        linesP = cv2.HoughLinesP(pictureAfterCanny, rho_res, theta_res * np.pi / 180, threshold, None, minLineLength, maxLineGap)
-        circles = cv2.HoughCircles(pictureAfterCanny, cv2.HOUGH_GRADIENT, dp, minDist, param1, param2, minRadius, maxRadius)
-        circles = np.uint16(np.around(circles))
+            pictureAfterCanny = cv2.Canny(pictureP2, threshold1, threshold2, apertureSize=3, L2gradient=False)
+            pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
 
-        if linesP is not None:
-            for i in range(0, len(linesP)):
-                l = linesP[i][0]
-                cv2.line(pictureAfterCannyBGR, (l[0], l[1]), (l[2], l[3]), (colorB, colorG, colorR), 3, cv2.LINE_AA)
+            linesP = cv2.HoughLinesP(pictureAfterCanny, rho_res, theta_res * np.pi / 180, threshold, None, minLineLength, maxLineGap)
+            circles = cv2.HoughCircles(pictureAfterCanny, cv2.HOUGH_GRADIENT, dp, minDist, param1, param2, minRadius, maxRadius)
+            circles = np.uint16(np.around(circles))
 
-        if circles is not None:
-            for i in circles[0, :]:
-                # draw the outer circle
-                cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), i[2], (255 - colorB, colorG, 255 - colorR), 2)
-                # draw the center of the circle
-                cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), 2, (colorB, 255 - colorG, colorR), 3)
+            if linesP is not None:
+                for i in range(0, len(linesP)):
+                    l = linesP[i][0]
+                    cv2.line(pictureAfterCannyBGR, (l[0], l[1]), (l[2], l[3]), (colorB, colorG, colorR), 3, cv2.LINE_AA)
 
-        cv2.imshow("result of hough circle transform", pictureAfterCannyBGR)
+            if circles is not None:
+                for i in circles[0, :]:
+                    # draw the outer circle
+                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), i[2], (255 - colorB, colorG, 255 - colorR), 2)
+                    # draw the center of the circle
+                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), 2, (colorB, 255 - colorG, colorR), 3)
 
-    except cv2.error:
-        pass
-    if cv2.waitKey(1) == ord('q'):
-        break
+            cv2.imshow("result of hough circle transform", pictureAfterCannyBGR)
+
+        except cv2.error:
+            pass
+        if cv2.waitKey(1) == ord('q'):
+            break
