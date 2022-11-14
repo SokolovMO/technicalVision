@@ -20,19 +20,24 @@ _, picture = cv2.threshold(picture, 100, 255, cv2.THRESH_BINARY)
 pictureCopy = picture
 createTrackbarForFindCountoursAndDrawContours()
 
-while True:
+if __name__ == "__main__":
 
-    contourIdx = int(cv2.getTrackbarPos("contourIdx", "conversion parameter"))
-    colorB = int(cv2.getTrackbarPos("colorB", "conversion parameter"))
-    colorG = int(cv2.getTrackbarPos("colorG", "conversion parameter"))
-    colorR = int(cv2.getTrackbarPos("colorR", "conversion parameter"))
-    thickness = int(cv2.getTrackbarPos("thickness", "conversion parameter"))
+    while True:
 
-    contours, hierarchy = cv2.findContours(picture, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
-    pictureCopy = cv2.drawContours(pictureCopy, contours, contourIdx, (colorB, colorG, colorR), thickness)
-    time.sleep(0.05)
-    cv2.imshow('picture', pictureCopy)
-    pictureCopy = cv2.imread('lr6/picture.png')
+        contourIdx = int(cv2.getTrackbarPos("contourIdx", "conversion parameter"))
+        colorB = int(cv2.getTrackbarPos("colorB", "conversion parameter"))
+        colorG = int(cv2.getTrackbarPos("colorG", "conversion parameter"))
+        colorR = int(cv2.getTrackbarPos("colorR", "conversion parameter"))
+        thickness = int(cv2.getTrackbarPos("thickness", "conversion parameter"))
 
-    if cv2.waitKey(1) == ord('q'):
-        break
+        contours, hierarchy = cv2.findContours(picture, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+        pictureCopy = cv2.drawContours(pictureCopy, contours, contourIdx, (colorB, colorG, colorR), thickness)
+
+        x, y, w, h = cv2.boundingRect(contours)
+        cv2.rectangle(pictureCopy, (x, y), (x + w, y + h), (255 - colorB, 255 - colorG, 255 - colorR), thickness)
+
+        cv2.imshow('picture', pictureCopy)
+        pictureCopy = cv2.imread('lr6/picture.png')
+
+        if cv2.waitKey(1) == ord('q'):
+            break
