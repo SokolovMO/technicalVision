@@ -60,9 +60,6 @@ if __name__ == "__main__":
             factP = cv2.arcLength(contours_poly[i], True)
             boundRestP = 2 * (boundRect[i][2] + boundRect[i][3])
             boundCircP = 2 * 3.141 * radius[i]
-            factS = cv2.contourArea(contours_poly[i])
-            boundRestS = 2 * (boundRect[i][2] + boundRect[i][3])
-            boundCircS = 3.141 * radius[i] ** 2
 
             if factP/boundRestP >= 0.95 and factP/boundRestP <= 1.05:
                 color = (255, 255, 0)
