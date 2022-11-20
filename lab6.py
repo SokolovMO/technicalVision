@@ -1,8 +1,5 @@
 import cv2
 import numpy as np
-import random as rnd
-
-rnd.seed(12345)
 
 def nothing(x):
     pass
