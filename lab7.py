@@ -66,8 +66,6 @@ def createTrackbarForCanny():
 
     cv2.createTrackbar("threshold1", "canny conversion parameter", 0, 255, nothing)
     cv2.createTrackbar("threshold2", "canny conversion parameter", 0, 255, nothing)
-
-def handlingTrackbarForHoughLines():
     
 if __name__ == "__main__":
 
