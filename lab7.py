@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 import math as math
+import os
 
 def nothing(x):
 
@@ -47,12 +48,12 @@ def createTrackbarForCircles():
 
     cv2.namedWindow("hough circles conversion parameter")
 
-    cv2.createTrackbar("dp", "hough circles conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("minDist", "hough circles conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("param1", "hough circles conversion parameter", 1, 10, nothing)
-    cv2.createTrackbar("param2", "hough circles conversion parameter", 1, 360, nothing)
-    cv2.createTrackbar("minRadius", "hough circles conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("maxRadius", "hough circles conversion parameter", 0, 255, nothing)
+    cv2.createTrackbar("dp", "hough circles conversion parameter", 1, 10, nothing)
+    cv2.createTrackbar("minDist", "hough circles conversion parameter", 20, 40, nothing)
+    cv2.createTrackbar("param1", "hough circles conversion parameter", 50, 100, nothing)
+    cv2.createTrackbar("param2", "hough circles conversion parameter", 30, 50, nothing)
+    cv2.createTrackbar("minRadius", "hough circles conversion parameter", 0, 100, nothing)
+    cv2.createTrackbar("maxRadius", "hough circles conversion parameter", 0, 100, nothing)
 
     cv2.createTrackbar("colorB", "hough circles conversion parameter", 0, 255, nothing)
     cv2.createTrackbar("colorG", "hough circles conversion parameter", 0, 255, nothing)
@@ -68,6 +69,8 @@ def createTrackbarForCanny():
     cv2.createTrackbar("threshold2", "canny conversion parameter", 0, 255, nothing)
     
 if __name__ == "__main__":
+
+    os.system('cls||clear')
 
     # задание 1
 
@@ -86,6 +89,8 @@ if __name__ == "__main__":
     createTrackbarForCanny()
 
     while True:
+        
+        os.system('cls||clear')
 
         try:
 
@@ -118,8 +123,8 @@ if __name__ == "__main__":
 
             cv2.imshow("result of standard hough line transform", pictureAfterCannyBGR)
 
-        except cv2.error:
-            print('error')
+        except cv2.error as err:
+            print(err)
             pass
 
         if cv2.waitKey(1) == ord('q'):
@@ -131,6 +136,8 @@ if __name__ == "__main__":
     createTrackbarForCanny()
 
     while True:
+        
+        os.system('cls||clear')
 
         try:
 
@@ -158,8 +165,8 @@ if __name__ == "__main__":
 
             cv2.imshow("result of probabilistic line transform", pictureAfterCannyBGR)
 
-        except cv2.error:
-            print('error')
+        except cv2.error as err:
+            print(err)
             pass
 
         if cv2.waitKey(1) == ord('q'):
@@ -185,6 +192,8 @@ if __name__ == "__main__":
     createTrackbarForCanny()
 
     while True:
+        
+        os.system('cls||clear')
 
         try:
 
@@ -223,14 +232,14 @@ if __name__ == "__main__":
             if circles is not None:
                 for i in circles[0, :]:
                     # draw the outer circle
-                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), i[2], (255 - colorB, colorG, 255 - colorR), 2)
+                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), i[2], (colorB, colorG, colorR), 2)
                     # draw the center of the circle
-                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), 2, (colorB, 255 - colorG, colorR), 3)
+                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), 2, (colorB, colorG, colorR), 3)
 
             cv2.imshow("result of hough circle transform", pictureAfterCannyBGR)
 
-        except cv2.error:
-            print('error')
+        except cv2.error as err:
+            print(err)
             pass
 
         if cv2.waitKey(1) == ord('q'):
@@ -246,6 +255,8 @@ if __name__ == "__main__":
     createTrackbarForCanny()
 
     while True:
+        
+        os.system('cls||clear')
 
         try:
 
@@ -280,11 +291,11 @@ if __name__ == "__main__":
             if cv2.waitKey(1) == ord('q'):
                 break
 
-        except AttributeError:
-            print('error')
+        except AttributeError as err:
+            print(err)
             break
-        except cv2.error:
-            print('error')
+        except cv2.error as err:
+            print(err)
             pass
 
     cv2.destroyAllWindows()
@@ -306,6 +317,8 @@ if __name__ == "__main__":
     createTrackbarForCanny()
 
     while True:
+        
+        os.system('cls||clear')
 
         try:
 
@@ -333,8 +346,8 @@ if __name__ == "__main__":
 
             cv2.imshow("result of probabilistic line transform", pictureAfterCannyBGR)
 
-        except cv2.error:
-            print('error')
+        except cv2.error as err:
+            print(err)
             pass
 
         if cv2.waitKey(1) == ord('q'):
@@ -356,10 +369,12 @@ if __name__ == "__main__":
 
     cv2.destroyAllWindows()
 
-    createTrackbarForHoughPLines()
     createTrackbarForCircles()
+    createTrackbarForCanny()
 
     while True:
+        
+        os.system('cls||clear')
 
         try:
 
@@ -386,17 +401,19 @@ if __name__ == "__main__":
             if circles is not None:
                 for i in circles[0, :]:
                     # draw the outer circle
-                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), i[2], (255 - colorB, colorG, 255 - colorR), 2)
+                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), i[2], (colorB, colorG, colorR), 2)
                     # draw the center of the circle
-                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), 2, (colorB, 255 - colorG, colorR), 3)
+                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), 2, (colorB, colorG, colorR), 3)
 
             cv2.imshow("result of hough circle transform", pictureAfterCannyBGR)
 
-        except cv2.error:
-            print('error')
+        except cv2.error as err:
+            print(err)
             pass
 
         if cv2.waitKey(1) == ord('q'):
             break
 
     cv2.destroyAllWindows()
+
+    os.system('cls||clear')
