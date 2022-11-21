@@ -23,7 +23,7 @@ def createTrackbarForHoughLines():
 
     cv2.moveWindow("hough lines conversion parameter", 960, 100)
 
-def createTrackbarForHoughLinesP():
+def createTrackbarForHoughPLines():
 
     cv2.namedWindow("hough P lines conversion parameter")
 
@@ -129,7 +129,7 @@ if __name__ == "__main__":
 
     cv2.destroyAllWindows()
 
-    createTrackbarForHoughLinesP()
+    createTrackbarForHoughPLines()
     createTrackbarForCanny()
 
     while True:
@@ -182,7 +182,7 @@ if __name__ == "__main__":
 
     cv2.destroyAllWindows()
 
-    createTrackbarForHoughLinesP()
+    createTrackbarForHoughPLines()
     createTrackbarForCircles()
     createTrackbarForCanny()
 
@@ -244,7 +244,7 @@ if __name__ == "__main__":
 
     video = cv2.VideoCapture('lr5/road.mp4')
 
-    createTrackbarForHoughLinesP()
+    createTrackbarForHoughPLines()
     createTrackbarForCanny()
 
     while True:
@@ -304,7 +304,7 @@ if __name__ == "__main__":
 
     cv2.destroyAllWindows()
 
-    createTrackbarForHoughLinesP()
+    createTrackbarForHoughPLines()
     createTrackbarForCanny()
 
     while True:
@@ -358,7 +358,7 @@ if __name__ == "__main__":
 
     cv2.destroyAllWindows()
 
-    createTrackbarForHoughLinesP()
+    createTrackbarForHoughPLines()
     createTrackbarForCircles()
 
     while True:
