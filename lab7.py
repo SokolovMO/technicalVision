@@ -236,41 +236,42 @@ if __name__ == "__main__":
 
         try:
 
-            try:
+            _, picture = video.read()
+            picture = cv2.resize(picture, (picture.shape[1] // 2, picture.shape[0] // 2))
+            picture = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
+            time.sleep(0.013)
 
-                _, picture = video.read()
-                picture = cv2.resize(picture, (picture.shape[1] // 2, picture.shape[0] // 2))
-                picture = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
-                time.sleep(0.013)
+            threshold1 = int(cv2.getTrackbarPos("threshold1", "hough lines conversion parameter P"))
+            threshold2 = int(cv2.getTrackbarPos("threshold2", "hough lines conversion parameter P"))
 
-                threshold1 = int(cv2.getTrackbarPos("threshold1", "hough lines conversion parameter P"))
-                threshold2 = int(cv2.getTrackbarPos("threshold2", "hough lines conversion parameter P"))
+            rho_res = int(cv2.getTrackbarPos("rho_res", "hough lines conversion parameter P"))
+            theta_res = int(cv2.getTrackbarPos("theta_res", "hough lines conversion parameter P"))
+            threshold = int(cv2.getTrackbarPos("threshold", "hough lines conversion parameter P"))
+            minLineLength = int(cv2.getTrackbarPos("minLineLength", "hough lines conversion parameter P"))
+            maxLineGap = int(cv2.getTrackbarPos("maxLineGap", "hough lines conversion parameter P"))
 
-                rho_res = int(cv2.getTrackbarPos("rho_res", "hough lines conversion parameter P"))
-                theta_res = int(cv2.getTrackbarPos("theta_res", "hough lines conversion parameter P"))
-                threshold = int(cv2.getTrackbarPos("threshold", "hough lines conversion parameter P"))
-                minLineLength = int(cv2.getTrackbarPos("minLineLength", "hough lines conversion parameter P"))
-                maxLineGap = int(cv2.getTrackbarPos("maxLineGap", "hough lines conversion parameter P"))
+            colorB = int(cv2.getTrackbarPos("colorB", "hough lines conversion parameter P"))
+            colorG = int(cv2.getTrackbarPos("colorG", "hough lines conversion parameter P"))
+            colorR = int(cv2.getTrackbarPos("colorR", "hough lines conversion parameter P"))
 
-                colorB = int(cv2.getTrackbarPos("colorB", "hough lines conversion parameter P"))
-                colorG = int(cv2.getTrackbarPos("colorG", "hough lines conversion parameter P"))
-                colorR = int(cv2.getTrackbarPos("colorR", "hough lines conversion parameter P"))
+            pictureAfterCanny = cv2.Canny(picture, threshold1, threshold2, apertureSize=3, L2gradient=False)
+            pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
+            linesP = cv2.HoughLinesP(pictureAfterCanny, rho_res, theta_res * np.pi / 180, threshold, None, minLineLength, maxLineGap)
 
-                pictureAfterCanny = cv2.Canny(picture7_1, threshold1, threshold2, apertureSize=3, L2gradient=False)
-                pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
-                linesP = cv2.HoughLinesP(pictureAfterCanny, rho_res, theta_res * np.pi / 180, threshold, None, minLineLength, maxLineGap)
+            if linesP is not None:
+                for i in range(0, len(linesP)):
+                    l = linesP[i][0]
+                    cv2.line(pictureAfterCannyBGR, (l[0], l[1]), (l[2], l[3]), (colorB, colorG, colorR), 3, cv2.LINE_AA)
 
-                if linesP is not None:
-                    for i in range(0, len(linesP)):
-                        l = linesP[i][0]
-                        cv2.line(pictureAfterCannyBGR, (l[0], l[1]), (l[2], l[3]), (colorB, colorG, colorR), 3, cv2.LINE_AA)
+            cv2.imshow("result of probabilistic line transform", pictureAfterCannyBGR)
 
-                cv2.imshow("result of probabilistic line transform", pictureAfterCannyBGR)
-            except cv2.error:
-                pass
+            if cv2.waitKey(1) == ord('q'):
+                break
 
         except AttributeError:
             break
+        except cv2.error:
+            pass
 
 cv2.destroyAllWindows()
 
