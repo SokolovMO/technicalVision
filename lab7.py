@@ -1,7 +1,5 @@
 import cv2
 import numpy as np
-import time
-import math
 
 def nothing(x):
 
@@ -239,7 +237,6 @@ if __name__ == "__main__":
             _, picture = video.read()
             picture = cv2.resize(picture, (picture.shape[1] // 2, picture.shape[0] // 2))
             picture = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
-            time.sleep(0.013)
 
             threshold1 = int(cv2.getTrackbarPos("threshold1", "hough lines conversion parameter P"))
             threshold2 = int(cv2.getTrackbarPos("threshold2", "hough lines conversion parameter P"))
