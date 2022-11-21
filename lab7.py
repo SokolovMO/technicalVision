@@ -5,6 +5,7 @@ import math
 
 def nothing(x):
     pass
+
 def createTrackbarForCannyAndHoughLines():
     cv2.namedWindow("hough lines conversion parameter")
 
@@ -56,9 +57,9 @@ def createTrackbarForCircles():
 
     cv2.moveWindow("hough circles conversion parameter", 1440, 100)
 
-# решение 1
-
 if __name__ == "__main__":
+
+    # задание 1
 
     picture7_1 = cv2.imread('lr7/7_1.jpg', cv2.IMREAD_GRAYSCALE)
 
@@ -146,6 +147,7 @@ if __name__ == "__main__":
 
         except cv2.error:
             pass
+
         if cv2.waitKey(1) == ord('q'):
             break
 
@@ -214,5 +216,65 @@ if __name__ == "__main__":
 
         except cv2.error:
             pass
+
         if cv2.waitKey(1) == ord('q'):
             break
+
+    cv2.destroyAllWindows()
+
+    # решение 3
+
+    # решение 4
+
+    pictureP4 = cv2.imread('lr7/pictureP4.jpg', cv2.IMREAD_GRAYSCALE)
+
+    while True:
+
+        cv2.imshow("original", pictureP4)
+
+        if cv2.waitKey(1) == ord('q'):
+            break
+
+    cv2.destroyAllWindows()
+
+    createTrackbarForCannyAndHoughLinesP()
+
+    while True:
+
+        try:
+
+            threshold1 = int(cv2.getTrackbarPos("threshold1", "hough lines conversion parameter P"))
+            threshold2 = int(cv2.getTrackbarPos("threshold2", "hough lines conversion parameter P"))
+
+            rho_res = int(cv2.getTrackbarPos("rho_res", "hough lines conversion parameter P"))
+            theta_res = int(cv2.getTrackbarPos("theta_res", "hough lines conversion parameter P"))
+            threshold = int(cv2.getTrackbarPos("threshold", "hough lines conversion parameter P"))
+            minLineLength = int(cv2.getTrackbarPos("minLineLength", "hough lines conversion parameter P"))
+            maxLineGap = int(cv2.getTrackbarPos("maxLineGap", "hough lines conversion parameter P"))
+
+            colorB = int(cv2.getTrackbarPos("colorB", "hough lines conversion parameter P"))
+            colorG = int(cv2.getTrackbarPos("colorG", "hough lines conversion parameter P"))
+            colorR = int(cv2.getTrackbarPos("colorR", "hough lines conversion parameter P"))
+
+            pictureAfterCanny = cv2.Canny(pictureP4, threshold1, threshold2, apertureSize=3, L2gradient=False)
+            pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
+            linesP = cv2.HoughLinesP(pictureAfterCanny, rho_res, theta_res * np.pi / 180, threshold, None, minLineLength, maxLineGap)
+
+            if linesP is not None:
+                for i in range(0, len(linesP)):
+                    l = linesP[i][0]
+                    cv2.line(pictureAfterCannyBGR, (l[0], l[1]), (l[2], l[3]), (colorB, colorG, colorR), 3, cv2.LINE_AA)
+
+            cv2.imshow("result of probabilistic line transform", pictureAfterCannyBGR)
+
+        except cv2.error:
+            pass
+
+        if cv2.waitKey(1) == ord('q'):
+            break
+
+    cv2.destroyAllWindows()
+
+    # решение 5
+
+    
