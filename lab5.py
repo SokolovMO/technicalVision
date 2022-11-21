@@ -102,7 +102,7 @@ cv2.destroyAllWindows()
 
 # задание 3
 
-video = cv2.VideoCapture('lr5/road.MOV')
+video = cv2.VideoCapture('lr5/road.mp4')
 
 createTrackbarCanny()
 
