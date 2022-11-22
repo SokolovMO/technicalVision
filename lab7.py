@@ -44,8 +44,8 @@ def createTrackbarForCircles():
     cv2.createTrackbar("minDist", "hough circles conversion parameter", 20, 40, nothing)
     cv2.createTrackbar("param1", "hough circles conversion parameter", 50, 100, nothing)
     cv2.createTrackbar("param2", "hough circles conversion parameter", 30, 50, nothing)
-    cv2.createTrackbar("minRadius", "hough circles conversion parameter", 0, 100, nothing)
-    cv2.createTrackbar("maxRadius", "hough circles conversion parameter", 0, 100, nothing)
+    cv2.createTrackbar("minRadius", "hough circles conversion parameter", 1, 100, nothing)
+    cv2.createTrackbar("maxRadius", "hough circles conversion parameter", 1, 100, nothing)
 
     cv2.moveWindow("hough circles conversion parameter", 1440, 500)
 
@@ -214,8 +214,8 @@ if __name__ == "__main__":
             colorG = int(cv2.getTrackbarPos("colorG", "color"))
             colorR = int(cv2.getTrackbarPos("colorR", "color"))
 
-            dp = int(cv2.getTrackbarPos("rho_res", "hough circles conversion parameter"))
-            minDist = int(cv2.getTrackbarPos("theta_res", "hough circles conversion parameter"))
+            dp = int(cv2.getTrackbarPos("dp", "hough circles conversion parameter"))
+            minDist = int(cv2.getTrackbarPos("minDist", "hough circles conversion parameter"))
             param1 = int(cv2.getTrackbarPos("param1", "hough circles conversion parameter"))
             param2 = int(cv2.getTrackbarPos("param2", "hough circles conversion parameter"))
             minRadius = int(cv2.getTrackbarPos("minRadius", "hough circles conversion parameter"))
@@ -392,8 +392,8 @@ if __name__ == "__main__":
             colorG = int(cv2.getTrackbarPos("colorG", "color"))
             colorR = int(cv2.getTrackbarPos("colorR", "color"))
 
-            dp = int(cv2.getTrackbarPos("rho_res", "hough circles conversion parameter"))
-            minDist = int(cv2.getTrackbarPos("theta_res", "hough circles conversion parameter"))
+            dp = int(cv2.getTrackbarPos("dp", "hough circles conversion parameter"))
+            minDist = int(cv2.getTrackbarPos("minDist", "hough circles conversion parameter"))
             param1 = int(cv2.getTrackbarPos("param1", "hough circles conversion parameter"))
             param2 = int(cv2.getTrackbarPos("param2", "hough circles conversion parameter"))
             minRadius = int(cv2.getTrackbarPos("minRadius", "hough circles conversion parameter"))
@@ -408,11 +408,11 @@ if __name__ == "__main__":
             if circles is not None:
                 for i in circles[0, :]:
                     # draw the outer circle
-                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), i[2], (colorB, colorG, colorR), 2)
+                    cv2.circle(picture7_5_X, (i[0], i[1]), i[2], (colorB, colorG, colorR), 2)
                     # draw the center of the circle
-                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), 2, (colorB, colorG, colorR), 3)
+                    cv2.circle(picture7_5_X, (i[0], i[1]), 2, (colorB, colorG, colorR), 3)
 
-            cv2.imshow("result of hough circle transform", pictureAfterCannyBGR)
+            cv2.imshow("result of hough circle transform", picture7_5_X)
 
         except cv2.error as err:
             print(err)
