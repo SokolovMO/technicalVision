@@ -11,9 +11,6 @@ def createTrackbarForHoughLines():
 
     cv2.namedWindow("hough lines conversion parameter")
 
-    cv2.createTrackbar("threshold1", "hough lines conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("threshold2", "hough lines conversion parameter", 0, 255, nothing)
-
     cv2.createTrackbar("rho_res", "hough lines conversion parameter", 1, 10, nothing)
     cv2.createTrackbar("theta_res", "hough lines conversion parameter", 1, 360, nothing)
     cv2.createTrackbar("threshold", "hough lines conversion parameter", 0, 255, nothing)
@@ -23,9 +20,6 @@ def createTrackbarForHoughLines():
 def createTrackbarForHoughPLines():
 
     cv2.namedWindow("hough P lines conversion parameter")
-
-    cv2.createTrackbar("threshold1", "hough P lines conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("threshold2", "hough P lines conversion parameter", 0, 255, nothing)
 
     cv2.createTrackbar("rho_res", "hough P lines conversion parameter", 1, 10, nothing)
     cv2.createTrackbar("theta_res", "hough P lines conversion parameter", 1, 360, nothing)
@@ -40,10 +34,10 @@ def createTrackbarForCircles():
 
     cv2.namedWindow("hough circles conversion parameter")
 
-    cv2.createTrackbar("dp", "hough circles conversion parameter", 1, 10, nothing)
+    cv2.createTrackbar("dp", "hough circles conversion parameter", 1, 100, nothing)
     cv2.createTrackbar("minDist", "hough circles conversion parameter", 20, 40, nothing)
-    cv2.createTrackbar("param1", "hough circles conversion parameter", 50, 100, nothing)
-    cv2.createTrackbar("param2", "hough circles conversion parameter", 30, 50, nothing)
+    cv2.createTrackbar("param1", "hough circles conversion parameter", 50, 300, nothing)
+    cv2.createTrackbar("param2", "hough circles conversion parameter", 30, 300, nothing)
     cv2.createTrackbar("minRadius", "hough circles conversion parameter", 1, 100, nothing)
     cv2.createTrackbar("maxRadius", "hough circles conversion parameter", 1, 100, nothing)
 
