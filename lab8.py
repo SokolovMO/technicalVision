@@ -17,7 +17,7 @@ contours_pattern, _ = cv2.findContours(pattern, cv2.RETR_EXTERNAL, cv2.CHAIN_APP
 contours_img, _ = cv2.findContours(img, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 
 m10 = cv2.moments(contours_pattern[0])
-hy10 = cv2.HuMoments(m10)
+hu10 = cv2.HuMoments(m10)
 
 if __name__ == "__main__":
 
@@ -27,9 +27,9 @@ if __name__ == "__main__":
 
         for i in range(len(contours_img)):
             m2i = cv2.moments(contours_img[i])
-            hy2i = cv2.HuMoments(m2i)
+            hu2i = cv2.HuMoments(m2i)
 
-            if abs((hy10[0] - hy2i[0]) / hy10[0]) <= 0.04:
+            if abs((hu10[0] - hu2i[0]) / hu10[0]) <= 0.04:
                 if abs((m10['m00'] - m2i['m00']) / m10['m00']) <= 0.01:
                     if not abs((m10['mu20'] - m2i['mu20']) / m10['mu20']) <= 0.01:
                         cv2.drawContours(img_color, contours_img, i, color, 5)
