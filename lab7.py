@@ -18,11 +18,7 @@ def createTrackbarForHoughLines():
     cv2.createTrackbar("theta_res", "hough lines conversion parameter", 1, 360, nothing)
     cv2.createTrackbar("threshold", "hough lines conversion parameter", 0, 255, nothing)
 
-    cv2.createTrackbar("colorB", "hough lines conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("colorG", "hough lines conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("colorR", "hough lines conversion parameter", 0, 255, nothing)
-
-    cv2.moveWindow("hough lines conversion parameter", 960, 100)
+    cv2.moveWindow("hough lines conversion parameter", 1440, 100)
 
 def createTrackbarForHoughPLines():
 
@@ -38,11 +34,7 @@ def createTrackbarForHoughPLines():
     cv2.createTrackbar("minLineLength", "hough P lines conversion parameter", 0, 255, nothing)
     cv2.createTrackbar("maxLineGap", "hough P lines conversion parameter", 0, 255, nothing)
 
-    cv2.createTrackbar("colorB", "hough P lines conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("colorG", "hough P lines conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("colorR", "hough P lines conversion parameter", 0, 255, nothing)
-
-    cv2.moveWindow("hough P lines conversion parameter", 960, 100)
+    cv2.moveWindow("hough P lines conversion parameter", 1440, 100)
 
 def createTrackbarForCircles():
 
@@ -55,11 +47,7 @@ def createTrackbarForCircles():
     cv2.createTrackbar("minRadius", "hough circles conversion parameter", 0, 100, nothing)
     cv2.createTrackbar("maxRadius", "hough circles conversion parameter", 0, 100, nothing)
 
-    cv2.createTrackbar("colorB", "hough circles conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("colorG", "hough circles conversion parameter", 0, 255, nothing)
-    cv2.createTrackbar("colorR", "hough circles conversion parameter", 0, 255, nothing)
-
-    cv2.moveWindow("hough circles conversion parameter", 1440, 100)
+    cv2.moveWindow("hough circles conversion parameter", 1440, 500)
 
 def createTrackbarForCanny():
 
@@ -67,7 +55,20 @@ def createTrackbarForCanny():
 
     cv2.createTrackbar("threshold1", "canny conversion parameter", 0, 255, nothing)
     cv2.createTrackbar("threshold2", "canny conversion parameter", 0, 255, nothing)
-    
+
+    cv2.moveWindow("color", 1440, 800)
+
+def createTrackbarForColor():
+
+    cv2.namedWindow("color")
+
+    cv2.createTrackbar("colorB", "color", 0, 255, nothing)
+    cv2.createTrackbar("colorG", "color", 0, 255, nothing)
+    cv2.createTrackbar("colorR", "color", 0, 255, nothing)
+
+    cv2.moveWindow("color", 1440, 1000)
+
+
 if __name__ == "__main__":
 
     os.system('cls||clear')
@@ -87,6 +88,7 @@ if __name__ == "__main__":
 
     createTrackbarForHoughLines()
     createTrackbarForCanny()
+    createTrackbarForColor()
 
     while True:
         
@@ -101,9 +103,9 @@ if __name__ == "__main__":
             theta_res = int(cv2.getTrackbarPos("theta_res", "hough lines conversion parameter"))
             threshold = int(cv2.getTrackbarPos("threshold", "hough lines conversion parameter"))
 
-            colorB = int(cv2.getTrackbarPos("colorB", "hough lines conversion parameter"))
-            colorG = int(cv2.getTrackbarPos("colorG", "hough lines conversion parameter"))
-            colorR = int(cv2.getTrackbarPos("colorR", "hough lines conversion parameter"))
+            colorB = int(cv2.getTrackbarPos("colorB", "color"))
+            colorG = int(cv2.getTrackbarPos("colorG", "color"))
+            colorR = int(cv2.getTrackbarPos("colorR", "color"))
 
             pictureAfterCanny = cv2.Canny(picture7_1, threshold1, threshold2, apertureSize=3, L2gradient=False)
             pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
@@ -134,6 +136,7 @@ if __name__ == "__main__":
 
     createTrackbarForHoughPLines()
     createTrackbarForCanny()
+    createTrackbarForColor()
 
     while True:
         
@@ -150,9 +153,9 @@ if __name__ == "__main__":
             minLineLength = int(cv2.getTrackbarPos("minLineLength", "hough P lines conversion parameter"))
             maxLineGap = int(cv2.getTrackbarPos("maxLineGap", "hough P lines conversion parameter"))
 
-            colorB = int(cv2.getTrackbarPos("colorB", "hough P lines conversion parameter"))
-            colorG = int(cv2.getTrackbarPos("colorG", "hough P lines conversion parameter"))
-            colorR = int(cv2.getTrackbarPos("colorR", "hough P lines conversion parameter"))
+            colorB = int(cv2.getTrackbarPos("colorB", "color"))
+            colorG = int(cv2.getTrackbarPos("colorG", "color"))
+            colorR = int(cv2.getTrackbarPos("colorR", "color"))
 
             pictureAfterCanny = cv2.Canny(picture7_1, threshold1, threshold2, apertureSize=3, L2gradient=False)
             pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
@@ -190,6 +193,7 @@ if __name__ == "__main__":
     createTrackbarForHoughPLines()
     createTrackbarForCircles()
     createTrackbarForCanny()
+    createTrackbarForColor()
 
     while True:
         
@@ -206,9 +210,9 @@ if __name__ == "__main__":
             minLineLength = int(cv2.getTrackbarPos("minLineLength", "hough P lines conversion parameter"))
             maxLineGap = int(cv2.getTrackbarPos("maxLineGap", "hough P lines conversion parameter"))
 
-            colorB = int(cv2.getTrackbarPos("colorB", "hough P lines conversion parameter"))
-            colorG = int(cv2.getTrackbarPos("colorG", "hough P lines conversion parameter"))
-            colorR = int(cv2.getTrackbarPos("colorR", "hough P lines conversion parameter"))
+            colorB = int(cv2.getTrackbarPos("colorB", "color"))
+            colorG = int(cv2.getTrackbarPos("colorG", "color"))
+            colorR = int(cv2.getTrackbarPos("colorR", "color"))
 
             dp = int(cv2.getTrackbarPos("rho_res", "hough circles conversion parameter"))
             minDist = int(cv2.getTrackbarPos("theta_res", "hough circles conversion parameter"))
@@ -253,6 +257,7 @@ if __name__ == "__main__":
 
     createTrackbarForHoughPLines()
     createTrackbarForCanny()
+    createTrackbarForColor()
 
     while True:
         
@@ -273,9 +278,9 @@ if __name__ == "__main__":
             minLineLength = int(cv2.getTrackbarPos("minLineLength", "hough P lines conversion parameter"))
             maxLineGap = int(cv2.getTrackbarPos("maxLineGap", "hough P lines conversion parameter"))
 
-            colorB = int(cv2.getTrackbarPos("colorB", "hough P lines conversion parameter"))
-            colorG = int(cv2.getTrackbarPos("colorG", "hough P lines conversion parameter"))
-            colorR = int(cv2.getTrackbarPos("colorR", "hough P lines conversion parameter"))
+            colorB = int(cv2.getTrackbarPos("colorB", "color"))
+            colorG = int(cv2.getTrackbarPos("colorG", "color"))
+            colorR = int(cv2.getTrackbarPos("colorR", "color"))
 
             pictureAfterCanny = cv2.Canny(picture, threshold1, threshold2, apertureSize=3, L2gradient=False)
             pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
@@ -315,6 +320,7 @@ if __name__ == "__main__":
 
     createTrackbarForHoughPLines()
     createTrackbarForCanny()
+    createTrackbarForColor()
 
     while True:
         
@@ -331,9 +337,9 @@ if __name__ == "__main__":
             minLineLength = int(cv2.getTrackbarPos("minLineLength", "hough P lines conversion parameter"))
             maxLineGap = int(cv2.getTrackbarPos("maxLineGap", "hough P lines conversion parameter"))
 
-            colorB = int(cv2.getTrackbarPos("colorB", "hough P lines conversion parameter"))
-            colorG = int(cv2.getTrackbarPos("colorG", "hough P lines conversion parameter"))
-            colorR = int(cv2.getTrackbarPos("colorR", "hough P lines conversion parameter"))
+            colorB = int(cv2.getTrackbarPos("colorB", "color"))
+            colorG = int(cv2.getTrackbarPos("colorG", "color"))
+            colorR = int(cv2.getTrackbarPos("colorR", "color"))
 
             pictureAfterCanny = cv2.Canny(pictureP4, threshold1, threshold2, apertureSize=3, L2gradient=False)
             pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
@@ -371,6 +377,7 @@ if __name__ == "__main__":
 
     createTrackbarForCircles()
     createTrackbarForCanny()
+    createTrackbarForColor()
 
     while True:
         
@@ -381,9 +388,9 @@ if __name__ == "__main__":
             threshold1 = int(cv2.getTrackbarPos("threshold1", "canny conversion parameter"))
             threshold2 = int(cv2.getTrackbarPos("threshold2", "canny conversion parameter"))
 
-            colorB = int(cv2.getTrackbarPos("colorB", "hough P lines conversion parameter"))
-            colorG = int(cv2.getTrackbarPos("colorG", "hough P lines conversion parameter"))
-            colorR = int(cv2.getTrackbarPos("colorR", "hough P lines conversion parameter"))
+            colorB = int(cv2.getTrackbarPos("colorB", "color"))
+            colorG = int(cv2.getTrackbarPos("colorG", "color"))
+            colorR = int(cv2.getTrackbarPos("colorR", "color"))
 
             dp = int(cv2.getTrackbarPos("rho_res", "hough circles conversion parameter"))
             minDist = int(cv2.getTrackbarPos("theta_res", "hough circles conversion parameter"))
