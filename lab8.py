@@ -26,6 +26,7 @@ if __name__ == "__main__":
         color = random.randint(0,255), random.randint(0,255), random.randint(0,255)
 
         for i in range(len(contours_img)):
+            
             m2i = cv2.moments(contours_img[i])
             hu2i = cv2.HuMoments(m2i)
 
