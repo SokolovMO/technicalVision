@@ -76,7 +76,7 @@ cv2.destroyAllWindows()
 
 # задание 2
 
-pictureNonResize = cv2.imread('lr5/5-5.jpg')
+pictureNonResize = cv2.imread('lr5/5-4.PNG')
 picture = cv2.resize(pictureNonResize, (pictureNonResize.shape[1] // 1, pictureNonResize.shape[0] // 1))
 
 while True:
@@ -92,6 +92,7 @@ createTrackbarCanny()
 while True:
     threshold1 = int(cv2.getTrackbarPos("threshold1", "conversion parameter"))
     threshold2 = int(cv2.getTrackbarPos("threshold2", "conversion parameter"))
+    picture = cv2.medianBlur(picture, 7)
     pictureCanny = cv2.Canny(picture, threshold1, threshold2, apertureSize=3, L2gradient=False)
     cv2.imshow('pictureCanny', pictureCanny)
     cv2.moveWindow('pictureCanny', coordPictireX, coordPictireY)
