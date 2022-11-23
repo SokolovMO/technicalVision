@@ -15,7 +15,7 @@ def createTrackbarForHoughLines():
     cv2.createTrackbar("theta_res", "hough lines conversion parameter", 1, 360, nothing)
     cv2.createTrackbar("threshold", "hough lines conversion parameter", 0, 255, nothing)
 
-    cv2.moveWindow("hough lines conversion parameter", 1440, 100)
+    cv2.moveWindow("hough lines conversion parameter", 1440, 50)
 
 def handlingTrackbarForHoughLines():
 
@@ -35,7 +35,7 @@ def createTrackbarForHoughPLines():
     cv2.createTrackbar("minLineLength", "hough P lines conversion parameter", 0, 255, nothing)
     cv2.createTrackbar("maxLineGap", "hough P lines conversion parameter", 0, 255, nothing)
 
-    cv2.moveWindow("hough P lines conversion parameter", 1440, 100)
+    cv2.moveWindow("hough P lines conversion parameter", 1440, 50)
 
 def handlingTrackbarForHoughPLines():
 
@@ -52,13 +52,13 @@ def createTrackbarForHoughCircles():
     cv2.namedWindow("hough circles conversion parameter")
 
     cv2.createTrackbar("dp", "hough circles conversion parameter", 1, 100, nothing)
-    cv2.createTrackbar("minDist", "hough circles conversion parameter", 20, 40, nothing)
+    cv2.createTrackbar("minDist", "hough circles conversion parameter", 1, 100, nothing)
     cv2.createTrackbar("param1", "hough circles conversion parameter", 50, 300, nothing)
     cv2.createTrackbar("param2", "hough circles conversion parameter", 30, 300, nothing)
     cv2.createTrackbar("minRadius", "hough circles conversion parameter", 1, 100, nothing)
     cv2.createTrackbar("maxRadius", "hough circles conversion parameter", 1, 100, nothing)
 
-    cv2.moveWindow("hough circles conversion parameter", 1440, 500)
+    cv2.moveWindow("hough circles conversion parameter", 1440, 350)
 
 def handlingTrackbarForHoughCircles():
 
@@ -78,7 +78,7 @@ def createTrackbarForCanny():
     cv2.createTrackbar("threshold1", "canny conversion parameter", 0, 255, nothing)
     cv2.createTrackbar("threshold2", "canny conversion parameter", 0, 255, nothing)
 
-    cv2.moveWindow("color", 1440, 800)
+    cv2.moveWindow("canny conversion parameter", 1440, 650)
 
 def handlingTrackbarForCanny():
 
@@ -95,7 +95,7 @@ def createTrackbarForColor():
     cv2.createTrackbar("colorG", "color", 0, 255, nothing)
     cv2.createTrackbar("colorR", "color", 0, 255, nothing)
 
-    cv2.moveWindow("color", 1440, 1000)
+    cv2.moveWindow("color", 1440, 800)
 
 def handlingTrackbarForColor():
 
@@ -221,13 +221,15 @@ if __name__ == "__main__":
 
         try:
 
+            pictureP2 = cv2.imread('lr7/pictureP2.png')
+            pictureP2gray = cv2.imread('lr7/pictureP2.png', cv2.IMREAD_GRAYSCALE)
+
             threshold1, threshold2 = handlingTrackbarForCanny()
             rho_res, theta_res, threshold, minLineLength, maxLineGap = handlingTrackbarForHoughPLines()
             dp, minDist, param1, param2, minRadius, maxRadius = handlingTrackbarForHoughCircles()
             colorB, colorG, colorR = handlingTrackbarForColor()
 
-            pictureAfterCanny = cv2.Canny(pictureP2, threshold1, threshold2, apertureSize=3, L2gradient=False)
-            pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
+            pictureAfterCanny = cv2.Canny(pictureP2gray, threshold1, threshold2, apertureSize=3, L2gradient=False)
 
             linesP = cv2.HoughLinesP(pictureAfterCanny, rho_res, theta_res * np.pi / 180, threshold, None, minLineLength, maxLineGap)
             circles = cv2.HoughCircles(pictureAfterCanny, cv2.HOUGH_GRADIENT, dp, minDist, param1, param2, minRadius, maxRadius)
@@ -236,16 +238,16 @@ if __name__ == "__main__":
             if linesP is not None:
                 for i in range(0, len(linesP)):
                     l = linesP[i][0]
-                    cv2.line(pictureAfterCannyBGR, (l[0], l[1]), (l[2], l[3]), (colorB, colorG, colorR), 3, cv2.LINE_AA)
+                    cv2.line(pictureP2, (l[0], l[1]), (l[2], l[3]), (colorB, colorG, colorR), 3, cv2.LINE_AA)
 
             if circles is not None:
                 for i in circles[0, :]:
                     # draw the outer circle
-                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), i[2], (colorB, colorG, colorR), 2)
+                    cv2.circle(pictureP2, (i[0], i[1]), i[2], (colorB, colorG, colorR), 2)
                     # draw the center of the circle
-                    cv2.circle(pictureAfterCannyBGR, (i[0], i[1]), 2, (colorB, colorG, colorR), 3)
+                    cv2.circle(pictureP2, (i[0], i[1]), 2, (colorB, colorG, colorR), 3)
 
-            cv2.imshow("result of hough circle transform", pictureAfterCannyBGR)
+            cv2.imshow("result of hough circle transform", pictureP2)
 
         except cv2.error as err:
             print(err)
@@ -372,12 +374,17 @@ if __name__ == "__main__":
 
         try:
 
+            picture7_5_X = cv2.imread('lr7/7_5_1.jpg')
+            picture7_5_X = cv2.resize(picture7_5_X, (picture7_5_X.shape[1] // 6, picture7_5_X.shape[0] // 6))
+
+            picture7_5_Xgray = cv2.imread('lr7/7_5_1.jpg', cv2.IMREAD_GRAYSCALE)
+            picture7_5_Xgray = cv2.resize(picture7_5_Xgray, (picture7_5_Xgray.shape[1] // 6, picture7_5_Xgray.shape[0] // 6))
+
             threshold1, threshold2 = handlingTrackbarForCanny()
             dp, minDist, param1, param2, minRadius, maxRadius = handlingTrackbarForHoughCircles()
             colorB, colorG, colorR = handlingTrackbarForColor()
 
-            pictureAfterCanny = cv2.Canny(picture7_5_X, threshold1, threshold2, apertureSize=3, L2gradient=False)
-            pictureAfterCannyBGR = cv2.cvtColor( pictureAfterCanny, cv2.COLOR_GRAY2BGR)
+            pictureAfterCanny = cv2.Canny(picture7_5_Xgray, threshold1, threshold2, apertureSize=3, L2gradient=False)
 
             circles = cv2.HoughCircles(pictureAfterCanny, cv2.HOUGH_GRADIENT, dp, minDist, param1, param2, minRadius, maxRadius)
             circles = np.uint16(np.around(circles))
