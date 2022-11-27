@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import math as math
 import os
+import time
 
 def nothing(x):
 
@@ -271,9 +272,10 @@ if __name__ == "__main__":
         os.system('cls||clear')
 
         try:
-
+            time.sleep(0.03)
             _, picture = video.read()
-            picture = cv2.resize(picture, (picture.shape[1] // 2, picture.shape[0] // 2))
+            picture = cv2.resize(picture, (picture.shape[1] // 1, picture.shape[0] // 1))
+            pictureCopy = picture
             picture = cv2.cvtColor(picture, cv2.COLOR_BGR2GRAY)
 
             threshold1, threshold2 = handlingTrackbarForCanny()
@@ -287,9 +289,9 @@ if __name__ == "__main__":
             if linesP is not None:
                 for i in range(0, len(linesP)):
                     l = linesP[i][0]
-                    cv2.line(pictureAfterCannyBGR, (l[0], l[1]), (l[2], l[3]), (colorB, colorG, colorR), 3, cv2.LINE_AA)
+                    cv2.line(pictureCopy, (l[0], l[1]), (l[2], l[3]), (colorB, colorG, colorR), 3, cv2.LINE_AA)
 
-            cv2.imshow("result of probabilistic line transform", pictureAfterCannyBGR)
+            cv2.imshow("result of probabilistic line transform", pictureCopy)
 
             if cv2.waitKey(1) == ord('q'):
                 break
